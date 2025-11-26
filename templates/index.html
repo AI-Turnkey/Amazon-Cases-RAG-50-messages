@@ -1122,8 +1122,18 @@
             const emptyState = messagesContainer.querySelector('.empty-state');
             if (emptyState) emptyState.remove();
 
-            // Show user message immediately
-            let displayData = { text: message, image: null };
+            // Store message before clearing input
+            const userMessage = message;
+            
+            // Clear input immediately
+            input.value = '';
+            input.style.height = 'auto';
+            
+            isLoading = true;
+            sendButton.disabled = true;
+
+            // Show user message immediately FIRST
+            let displayData = { text: userMessage, image: null };
             if (selectedImage) {
                 const reader = new FileReader();
                 reader.onload = function(e) {
@@ -1132,19 +1142,15 @@
                         name: selectedImage.name
                     };
                     addMessageToUI('user', displayData);
+                    scrollToBottom();
                 };
                 reader.readAsDataURL(selectedImage);
             } else {
                 addMessageToUI('user', displayData);
+                scrollToBottom();
             }
-
-            input.value = '';
-            input.style.height = 'auto';
             
-            isLoading = true;
-            sendButton.disabled = true;
-            
-            // Show typing indicator
+            // THEN show typing indicator (will appear below user message)
             const typingMessage = document.createElement('div');
             typingMessage.className = 'message bot loading';
             typingMessage.innerHTML = '<div class="message-avatar bot-avatar">AI</div><div class="message-content"><div class="typing-indicator"><div class="typing-dot"></div><div class="typing-dot"></div><div class="typing-dot"></div></div></div>';
@@ -1156,7 +1162,7 @@
                 
                 if (selectedImage) {
                     const formData = new FormData();
-                    formData.append('message', message);
+                    formData.append('message', userMessage);
                     formData.append('image', selectedImage);
                     
                     response = await fetch('/send_message', {
@@ -1167,7 +1173,7 @@
                     response = await fetch('/send_message', {
                         method: 'POST',
                         headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify({ message: message })
+                        body: JSON.stringify({ message: userMessage })
                     });
                 }
 
