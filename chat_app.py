@@ -868,9 +868,10 @@ def send_message():
             'content': user_message if user_message else ""
         }
         
-        # Add image data if present (only add fields that exist in database)
-        if stored_image_info:
-            user_message_data['image_url'] = stored_image_info['url']
+        # Add image data if present (TEMP: Don't save to DB until columns exist)
+        # Image is still uploaded to Supabase Storage and used for analysis
+        # Just not saving URL to messages table yet
+        pass
         
         user_msg_response = supabase.table('messages').insert(user_message_data).execute()
         
@@ -927,7 +928,7 @@ def send_message():
                         N8N_IMAGE_WEBHOOK_URL,
                         files=files,
                         data=image_payload,
-                        timeout=60
+                        timeout=120  # Increased from 60 to 120 seconds for image processing
                     )
                     
                     print(f"📨 Image Webhook Response Status: {image_response.status_code}")
@@ -998,7 +999,7 @@ def send_message():
                 N8N_WEBHOOK_URL,
                 json=main_payload,
                 headers={'Content-Type': 'application/json'},
-                timeout=60
+                timeout=120  # Increased from 60 to 120 seconds for AI processing
             )
             
             print(f"📨 Main Webhook Response Status: {main_response.status_code}")
