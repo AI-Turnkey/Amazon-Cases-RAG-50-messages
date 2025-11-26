@@ -1,1 +1,15 @@
+import os
 
+# Supabase Configuration
+SUPABASE_URL = os.environ.get('SUPABASE_URL', "https://ffreghtmxscuwfnjvlzz.supabase.co")
+SUPABASE_KEY = os.environ.get('SUPABASE_KEY', "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZmcmVnaHRteHNjdXdmbmp2bHp6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjI5NDY4NzYsImV4cCI6MjA3ODUyMjg3Nn0.eYRvMInQqUtiWtUcHUAWi4cBk_J1HTvm8ilG4I4_r9s")
+
+# N8N Webhook Configuration
+N8N_WEBHOOK_URL = os.environ.get('N8N_WEBHOOK_URL', "https://turnkeyproductmanagement.app.n8n.cloud/webhook/9863887b-d65c-47d4-9100-1dad669dfce8")
+N8N_IMAGE_WEBHOOK_URL = os.environ.get('N8N_IMAGE_WEBHOOK_URL', "https://your-n8n-instance.com/webhook/your-image-webhook")
+
+# Flask Configuration
+SECRET_KEY = os.environ.get('SECRET_KEY', 'change-this-to-a-random-secret-key-in-production')
+DEBUG = os.environ.get('DEBUG', 'False') == 'True'
+PORT = int(os.environ.get('PORT', 5000))
+MAX_CHAT_HISTORIES = int(os.environ.get('MAX_CHAT_HISTORIES', 3))
