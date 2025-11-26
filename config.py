@@ -6,7 +6,7 @@ SUPABASE_KEY = os.environ.get('SUPABASE_KEY', "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXV
 
 # N8N Webhook Configuration
 N8N_WEBHOOK_URL = os.environ.get('N8N_WEBHOOK_URL', "https://turnkeyproductmanagement.app.n8n.cloud/webhook/9863887b-d65c-47d4-9100-1dad669dfce8")
-N8N_IMAGE_WEBHOOK_URL = os.environ.get('N8N_IMAGE_WEBHOOK_URL', "https://your-n8n-instance.com/webhook/your-image-webhook")
+N8N_IMAGE_WEBHOOK_URL = os.environ.get('N8N_IMAGE_WEBHOOK_URL', "https://turnkeyproductmanagement.app.n8n.cloud/webhook/603bfb21-fe21-4904-ae21-0eb472a1b98e")
 
 # Flask Configuration
 SECRET_KEY = os.environ.get('SECRET_KEY', 'change-this-to-a-random-secret-key-in-production')
