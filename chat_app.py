@@ -868,11 +868,9 @@ def send_message():
             'content': user_message if user_message else ""
         }
         
-        # Add image data if present
+        # Add image data if present (only add fields that exist in database)
         if stored_image_info:
             user_message_data['image_url'] = stored_image_info['url']
-            user_message_data['image_filename'] = stored_image_info['filename']
-            user_message_data['image_size'] = stored_image_info['size']
         
         user_msg_response = supabase.table('messages').insert(user_message_data).execute()
         
